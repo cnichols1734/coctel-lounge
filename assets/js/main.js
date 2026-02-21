@@ -186,13 +186,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // Menu Hover Image Logic
   const menuRows = document.querySelectorAll('.menu-row');
   const hoverImgContainer = document.querySelector('.menu-hover-image');
-  const hoverImgInner = document.querySelector('.hover-img-inner');
+  const hoverImgInners = document.querySelectorAll('.hover-img-inner');
 
   menuRows.forEach(row => {
     row.addEventListener('mouseenter', () => {
-      // 1. Change image class
+      // 1. Change active image
       const bgName = row.getAttribute('data-image');
-      hoverImgInner.className = `hover-img-inner ${bgName}`;
+      hoverImgInners.forEach(img => {
+        if (img.classList.contains(bgName)) {
+          img.classList.add('active');
+        } else {
+          img.classList.remove('active');
+        }
+      });
       // 2. Show container
       hoverImgContainer.classList.add('active');
       cursor.classList.add('hovering');
